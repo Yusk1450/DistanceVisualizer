@@ -57,6 +57,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6A4469EF1B438AE2005941A5 /* ofxMatrix3x3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMatrix3x3.h; sourceTree = "<group>"; };
+		6A4469F01B438AE2005941A5 /* ofxMatrix4x4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxMatrix4x4.h; sourceTree = "<group>"; };
+		6A4469F11B438AE2005941A5 /* ofxPoint2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPoint2f.h; sourceTree = "<group>"; };
+		6A4469F21B438AE2005941A5 /* ofxPoint3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPoint3f.h; sourceTree = "<group>"; };
+		6A4469F31B438AE2005941A5 /* ofxPoint4f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPoint4f.h; sourceTree = "<group>"; };
+		6A4469F41B438AE2005941A5 /* ofxQuaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxQuaternion.h; sourceTree = "<group>"; };
+		6A4469F51B438AE2005941A5 /* ofxVec2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxVec2f.h; sourceTree = "<group>"; };
+		6A4469F61B438AE2005941A5 /* ofxVec3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxVec3f.h; sourceTree = "<group>"; };
+		6A4469F71B438AE2005941A5 /* ofxVec4f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxVec4f.h; sourceTree = "<group>"; };
+		6A4469F81B438AE2005941A5 /* ofxVectorMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxVectorMath.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -105,9 +115,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A4469ED1B438AE2005941A5 /* ofxVectorMath */ = {
+			isa = PBXGroup;
+			children = (
+				6A4469EE1B438AE2005941A5 /* src */,
+			);
+			name = ofxVectorMath;
+			path = ../../../addons/ofxVectorMath;
+			sourceTree = "<group>";
+		};
+		6A4469EE1B438AE2005941A5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				6A4469EF1B438AE2005941A5 /* ofxMatrix3x3.h */,
+				6A4469F01B438AE2005941A5 /* ofxMatrix4x4.h */,
+				6A4469F11B438AE2005941A5 /* ofxPoint2f.h */,
+				6A4469F21B438AE2005941A5 /* ofxPoint3f.h */,
+				6A4469F31B438AE2005941A5 /* ofxPoint4f.h */,
+				6A4469F41B438AE2005941A5 /* ofxQuaternion.h */,
+				6A4469F51B438AE2005941A5 /* ofxVec2f.h */,
+				6A4469F61B438AE2005941A5 /* ofxVec3f.h */,
+				6A4469F71B438AE2005941A5 /* ofxVec4f.h */,
+				6A4469F81B438AE2005941A5 /* ofxVectorMath.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				6A4469ED1B438AE2005941A5 /* ofxVectorMath */,
 			);
 			name = addons;
 			sourceTree = "<group>";

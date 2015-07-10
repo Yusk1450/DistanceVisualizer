@@ -1,4 +1,7 @@
+
 #include "testApp.h"
+#include <math.h>
+#include "ofxVectorMath.h"
 
 vector<string> split(const string &str, const string &delim)
 {
@@ -40,15 +43,18 @@ void testApp::setup()
 	ofBackground(255, 255, 255);
 	ofSetCircleResolution(1000);
 	
-	baseRadius = 100.0f;
-	maxRadius = 300.0f;
+	baseRadius = 100.0f;			// ベースラインの半径
+	maxRadius = 300.0f;				// 最大距離時の半径
+	topSensorDeg = 90.0f;			// センサ0番目の角度
+	sensorIntervalDeg = 15.0f;		// センサ角度
 	
 	for (int i = 0; i < 6; i++)
 	{
-		dists.push_back(ofRandom(4000));
+		dists.push_back(0.0f);
+//		dists.push_back(ofRandom(4000.0f));
 	}
 	
-	serial.setup("/dev/cu.usbmodem1411", 9600);
+	serial.setup("/dev/cu.usbmodem1451", 9600);
 }
 
 //--------------------------------------------------------------
@@ -65,6 +71,9 @@ void testApp::update()
 			dists[i] = csv[i];
 		}
 	}
+	pitch = csv[6] * 180.0f;
+	roll = csv[7];
+	yaw = csv[8];
 }
 
 vector<double> testApp::readSerialCSV()
@@ -125,8 +134,6 @@ vector<double> testApp::readSerialCSV()
 //--------------------------------------------------------------
 void testApp::draw()
 {
-	float deg = 270.0f;
-	
 	ofNoFill();
 	
 	// ベースライン
@@ -135,6 +142,26 @@ void testApp::draw()
 	// マックスライン
 	ofSetColor(255, 0, 0);
 	ofCircle(circleCenterX, circleCenterY, maxRadius);
+	
+	// 座標変換
+//	for (int i = 0; i < 6; i++)
+//	{
+//		if (dists[i] != 0)
+//		{
+//			const float deg = topSensorDeg + (sensorIntervalDeg * i);
+//			const float rad = ofDegToRad(deg);
+//
+//			float srcX = cos(rad) * dists[i];
+//			float srcY = sin(rad) * dists[i];
+//			float srcZ = 0.0f;
+//			
+//			// ピッチの値180度？
+//			ofxVec3f vec = transformAffine3DX(ofVec3f(srcX, srcY, srcZ), pitch);
+//			dists[i] = vec.y;
+//			
+//		}
+//	}
+//	cout << "---------------------------" << endl;
 	
 	for (int i = 0; i < 6; i++)
 	{
@@ -159,16 +186,30 @@ void testApp::draw()
 	ofDrawBitmapString("DistVisualizer Beta", 0, 10);
 }
 
+ofxVec3f testApp::transformAffine3DX(ofVec3f v, float deg)
+{
+	ofxVec3f res;
+	const float rad = ofDegToRad(deg);
+	
+	res.x = v.x;
+	res.y = (v.y * cos(rad)) + (v.y * -sin(rad));
+	res.z = (v.z * sin(rad)) + (v.z * cos(rad));
+	
+//	cout << v.y << "|" << cos(rad) << "|" << -sin(rad) << "| res=" << res.y << endl;
+	
+	return res;
+}
+
 ofPoint testApp::pointInScreen(int dist, int sensorID)
 {
-	const float deg = 270.0f + (15.0f * sensorID);
+	const float deg = topSensorDeg + (sensorIntervalDeg * sensorID);
 	const float rad = ofDegToRad(deg);
 	
 	dist = dist / 20;
 	
 	ofPoint pos;
-	pos.x = cos(rad) * (baseRadius + dist) + circleCenterX;
-	pos.y = sin(rad) * (baseRadius + dist) + circleCenterY;
+	pos.x = cos(rad) * -1 * (baseRadius + dist) + circleCenterX;
+	pos.y = sin(rad) * -1 * (baseRadius + dist) + circleCenterY;
 	
 	return pos;
 }
@@ -176,10 +217,6 @@ ofPoint testApp::pointInScreen(int dist, int sensorID)
 //--------------------------------------------------------------
 void testApp::keyPressed(int key)
 {
-	for (int i = 0; i < 6; i++)
-	{
-		dists[i] = ofRandom(4000);
-	}
 }
 
 //--------------------------------------------------------------

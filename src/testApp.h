@@ -10,11 +10,18 @@ private:
 	float baseRadius;
 	float maxRadius;
 
+	float topSensorDeg;
+	float sensorIntervalDeg;
+	
 	ofSerial serial;
 	string bufSerialStr;
 	vector<int> dists;
+	float pitch;
+	float roll;
+	float yaw;
 	
 private:
+	ofVec3f transformAffine3DX(ofVec3f v, float deg);
 	ofPoint pointInScreen(int dist, int sensorID);
 	
 public:
