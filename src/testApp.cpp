@@ -54,7 +54,8 @@ void testApp::setup()
 //		dists.push_back(ofRandom(4000.0f));
 	}
 	
-	serial.setup("/dev/cu.usbmodem1451", 9600);
+	string port = ofBufferFromFile("port.txt");
+	serial.setup(port, 9600);
 }
 
 //--------------------------------------------------------------
